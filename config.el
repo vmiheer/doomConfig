@@ -35,6 +35,9 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
+(use-package! org-mode-crate
+             :init (global-set-key (kbd "<f12>") 'org-agenda)
+             :config (require 'org-mode-crate))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
