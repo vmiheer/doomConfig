@@ -12,6 +12,12 @@
 (package! org-ref)
 (package! org-mode-crate
   :recipe (:host github :repo "vedang/org-mode-crate"))
+(package! realgud)
+(package! realgud-ipdb)
+(package! py-autopep8)
+(package! git-link)
+(package! lsp-pyright)
+;; (package! lsp-julia)
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:

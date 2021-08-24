@@ -45,6 +45,59 @@
 (setq enable-local-variables t)
 
 
+(make-variable-buffer-local 'compile-command)
+
+(map! :leader
+      (:prefix ("t" . "toggle")
+        :desc "Toggle mouse support in term mode" "m" #'xterm-mouse-mode))
+
+(use-package! python-mode
+  :hook #'auto-revert-mode
+  )
+
+(use-package! yaml-mode
+  :mode (".yaml$")
+  :hook
+  (yaml-mode . yaml-mode-outline-hook)
+
+  :init
+  (defun yaml-outline-level ()
+    "Return the outline level based on the indentation, hardcoded at 2 spaces."
+    (s-count-matches "[ ]\\{2\\}" (match-string 0)))
+
+  (defun yaml-mode-outline-hook ()
+    (outline-minor-mode)
+    (setq outline-regexp
+      (rx
+       (seq
+        bol
+        (group (zero-or-more "  ")
+               (or (group
+                    (seq (or (seq "\"" (*? (not (in "\"" "\n"))) "\"")
+                             (seq "'" (*? (not (in "'" "\n"))) "'")
+                             (*? (not (in ":" "\n"))))
+                         ":"
+                         (?? (seq
+                              (*? " ")
+                              (or (seq "&" (one-or-more nonl))
+                                  (seq ">-")
+                                  (seq "|"))
+                              eol))))
+                   (group (seq
+                           "- "
+                           (+ (not (in ":" "\n")))
+                           ":"
+                           (+ nonl)
+                           eol)))))))
+    (setq outline-level 'yaml-outline-level))
+  )
+
+(windmove-default-keybindings)
+(use-package! lsp-julia
+    :config
+    (setq lsp-julia-package-dir nil)
+    (setq lsp-julia-flags `("-J/home/mvaidya/.julia/languageserver.so"))
+      (setq lsp-julia-default-environment "~/.julia/environments/v1.6"))
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
