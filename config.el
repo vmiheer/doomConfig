@@ -39,6 +39,11 @@
              :init (global-set-key (kbd "<f12>") 'org-agenda)
              :config (require 'org-mode-crate))
 
+(use-package! org
+  :config (setq fill-column 80)
+  :init (add-hook 'org-mode-hook '(lambda () (auto-fill-mode 1)))
+  )
+
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)

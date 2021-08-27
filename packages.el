@@ -11,7 +11,7 @@
 (package! org-pomodoro)
 (package! org-ref)
 (package! org-mode-crate
-  :recipe (:host github :repo "vedang/org-mode-crate"))
+  :recipe (:host github :repo "vmiheer/org-mode-crate"))
 (package! realgud)
 (package! realgud-ipdb)
 (package! py-autopep8)
