@@ -41,7 +41,12 @@
 
 (use-package! org
   :config (setq fill-column 80)
-  :init (add-hook 'org-mode-hook '(lambda () (auto-fill-mode 1)))
+  :init (add-hook 'org-mode-hook '(lambda ()
+                                    (progn
+                                      (auto-fill-mode 1)
+                                      (flyspell-mode)
+                                      )
+                                    ))
   )
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
