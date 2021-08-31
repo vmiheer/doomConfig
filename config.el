@@ -103,6 +103,7 @@
   )
 
 (windmove-default-keybindings)
+;; TODO: make it generic using https://www.gnu.org/software/emacs/manual/html_node/elisp/Backquote.html
 (use-package! lsp-julia
     :config
     (setq lsp-julia-package-dir nil)
