@@ -39,6 +39,17 @@
              :init (global-set-key (kbd "<f12>") 'org-agenda)
              :config (require 'org-mode-crate))
 
+
+(use-package! markdown-mode
+  :config (setq fill-column 80)
+  :init (add-hook 'gfm-mode-hook '(lambda ()
+                                    (progn
+                                      (auto-fill-mode 1)
+                                      (flyspell-mode)
+                                      )
+                                    ))
+  )
+
 (use-package! org
   :config (setq fill-column 80)
   :init (add-hook 'org-mode-hook '(lambda ()
