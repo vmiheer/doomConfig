@@ -70,6 +70,10 @@
 
 (map! :leader
       (:prefix ("t" . "toggle")
+        :desc "Toggle git gutter" "z" #'git-gutter:toggle))
+
+(map! :leader
+      (:prefix ("t" . "toggle")
         :desc "Toggle mouse support in term mode" "m" #'xterm-mouse-mode))
 
 (use-package! python-mode
