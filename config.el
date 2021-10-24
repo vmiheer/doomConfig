@@ -124,6 +124,16 @@
     (setq lsp-julia-package-dir nil)
     (setq lsp-julia-flags `("-J/home/mvaidya/.julia/languageserver.so"))
       (setq lsp-julia-default-environment "~/.julia/environments/v1.6"))
+(use-package! tree-sitter
+  :config
+  (require 'tree-sitter-langs)
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+(use-package! lsp-python-ms
+  :init (setq lsp-python-ms-nupkg-channel "daily")
+  )
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
