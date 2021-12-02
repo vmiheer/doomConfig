@@ -1,0 +1,7 @@
+#+TITLE: My doom org minimal config
+#+DATE:    December 1, 2021
+#+STARTUP: inlineimages nofold
+
+* To install on windows
+** Prerequisites
+- [[https://www.mingw-w64.org/downloads/#msys2][msys]]
