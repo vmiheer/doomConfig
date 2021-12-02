@@ -28,7 +28,7 @@
 
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with he
+;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-one)
 
@@ -39,9 +39,9 @@
   "~/org"
   ))
 
-(use-package! org-mode-crate
-             :init (global-set-key (kbd "<f12>") 'org-agenda)
-             :config (require 'org-mode-crate))
+;; (use-package! org-mode-crate
+;;              :init (global-set-key (kbd "<f12>") 'org-agenda)
+;;              :config (require 'org-mode-crate))
 
 (use-package! evil-vars
   :config (add-to-list 'evil-emacs-state-modes 'org-agenda-mode))
@@ -73,6 +73,7 @@
                                     (progn
                                       (auto-fill-mode 1)
                                       (flyspell-mode)
+                                      (auto-revert-mode 1)
                                       )
                                     ))
   )
@@ -93,64 +94,7 @@
       (:prefix ("t" . "toggle")
         :desc "Toggle mouse support in term mode" "m" #'xterm-mouse-mode))
 
-(use-package! python-mode
-  :hook #'auto-revert-mode
-  )
-
-(use-package! yaml-mode
-  :mode (".yaml$")
-  :hook
-  (yaml-mode . yaml-mode-outline-hook)
-
-  :init
-  (defun yaml-outline-level ()
-    "Return the outline level based on the indentation, hardcoded at 2 spaces."
-    (s-count-matches "[ ]\\{2\\}" (match-string 0)))
-
-  (defun yaml-mode-outline-hook ()
-    (outline-minor-mode)
-    (setq outline-regexp
-      (rx
-       (seq
-        bol
-        (group (zero-or-more "  ")
-               (or (group
-                    (seq (or (seq "\"" (*? (not (in "\"" "\n"))) "\"")
-                             (seq "'" (*? (not (in "'" "\n"))) "'")
-                             (*? (not (in ":" "\n"))))
-                         ":"
-                         (?? (seq
-                              (*? " ")
-                              (or (seq "&" (one-or-more nonl))
-                                  (seq ">-")
-                                  (seq "|"))
-                              eol))))
-                   (group (seq
-                           "- "
-                           (+ (not (in ":" "\n")))
-                           ":"
-                           (+ nonl)
-                           eol)))))))
-    (setq outline-level 'yaml-outline-level))
-  )
-
 (windmove-default-keybindings)
-;; TODO: make it generic using https://www.gnu.org/software/emacs/manual/html_node/elisp/Backquote.html
-(use-package! lsp-julia
-    :config
-    (setq lsp-julia-package-dir nil)
-    (setq lsp-julia-flags `("-J/home/mvaidya/.julia/languageserver.so"))
-      (setq lsp-julia-default-environment "~/.julia/environments/v1.6"))
-(use-package! tree-sitter
-  :config
-  (require 'tree-sitter-langs)
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
-
-(use-package! lsp-python-ms
-  :init (setq lsp-python-ms-nupkg-channel "daily")
-  )
-
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
@@ -160,7 +104,6 @@
 ;;   this file. Emacs searches the `load-path' when you load packages with
 ;;   `require' or `use-package'.
 ;; - `map!' for binding new keys
-
 ;;
 ;; To get information about any of these functions/macros, move the cursor over
 ;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').

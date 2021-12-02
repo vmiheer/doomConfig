@@ -9,32 +9,14 @@
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 (package! gitconfig-mode
-	  	  :recipe (:host github :repo "magit/git-modes"
-				 			 :files ("gitconfig-mode.el")))
+	  :recipe (:host github :repo "magit/git-modes"
+			 :files ("gitconfig-mode.el")))
+(package! org-pomodoro)
 (package! gitignore-mode
 	  	  :recipe (:host github :repo "magit/git-modes"
 				 			 :files ("gitignore-mode.el")))
-(package! flx)
-(package! org-pomodoro)
-(package! org-ref)
-(package! org-mode-crate
-  :recipe (:host github :repo "vmiheer/org-mode-crate"))
-;; (all-the-icons :type git :flavor melpa :files (:defaults "data" "all-the-icons-pkg.el") :host github :repo "domtronn/all-the-icons.el")
-(package! yasnippet-radical-snippets
-  :recipe (:host github :repo "vmiheer/yasnippet-radical-snippets"
-	   :files (:defaults "snippets" "yasnippet-radical-snippets.el")))
-(package! realgud)
-(package! realgud-ipdb)
-(package! py-autopep8)
-(package! git-link)
-(package! lsp-pyright)
-(package! lsp-julia)
-(package! forge)
-;; instructions from https://hungyi.net/posts/use-emacs-tree-sitter-doom-emacs/
-(package! tree-sitter)
-(package! tree-sitter-langs)
-(package! evil-string-inflection)
-;; (package! poetry)
+;; (package! org-mode-crate
+;;   :recipe (:host github :repo "vedang/org-mode-crate"))
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
