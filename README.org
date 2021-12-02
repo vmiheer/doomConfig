@@ -5,3 +5,6 @@
 * To install on windows
 ** Prerequisites
 - [[https://www.mingw-w64.org/downloads/#msys2][msys]]
+  #+BEGIN_SRC bash
+  pacman -S make aspell aspell-en
+  #+END_SRC
