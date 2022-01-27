@@ -108,6 +108,23 @@
     (setq lsp-julia-package-dir nil)
     (setq lsp-julia-flags `("-J/home/mvaidya/.julia/languageserver.so"))
       (setq lsp-julia-default-environment "~/.julia/environments/v1.6"))
+
+(use-package! tramp
+  :config
+  (dolist (elem '("~/.local/bin" "~/.emacs.d/.local/etc/lsp/clangd/clangd_12.0.0/bin"))
+    (add-to-list 'tramp-remote-path elem
+                 )
+    )
+  )
+
+(use-package! lsp
+  :config
+  (lsp-register-client
+    (make-lsp-client :new-connection (lsp-tramp-connection "clangd")
+                     :major-modes '(c++-mode)
+                     :remote? t
+                     :server-id 'clangd-remote)))
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
