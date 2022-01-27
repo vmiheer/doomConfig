@@ -34,10 +34,38 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory (if (eq system-type 'windows-nt)
+    "~/box/org"
+  "~/org"
+  ))
+
 (use-package! org-mode-crate
              :init (global-set-key (kbd "<f12>") 'org-agenda)
              :config (require 'org-mode-crate))
+
+(use-package! evil-vars
+  :config (add-to-list 'evil-emacs-state-modes 'org-agenda-mode))
+
+(use-package! org-pomodoro
+  :init (add-hook 'org-pomodoro-finished-hook
+                  (lambda () (progn
+                          (shell-command "powershell -C \"New-BurntToastNotification  -Text DonePomodoro\"")
+                          (save-excursion
+                            (org-clock-goto)
+                            (save-buffer))
+                          )))
+        (add-hook 'org-pomodoro-started-hook
+                  (lambda () (shell-command "powershell -C \"New-BurntToastNotification  -Text StartedPomodoro\""))))
+
+(use-package! markdown-mode
+  :config (setq fill-column 80)
+  :init (add-hook 'gfm-mode-hook '(lambda ()
+                                    (progn
+                                      (auto-fill-mode 1)
+                                      (flyspell-mode)
+                                      )
+                                    ))
+  )
 
 (use-package! org
   :config (setq fill-column 80)
@@ -56,6 +84,10 @@
 
 
 (make-variable-buffer-local 'compile-command)
+
+(map! :leader
+      (:prefix ("t" . "toggle")
+        :desc "Toggle git gutter" "z" #'git-gutter:toggle))
 
 (map! :leader
       (:prefix ("t" . "toggle")
@@ -103,6 +135,7 @@
   )
 
 (windmove-default-keybindings)
+;; TODO: make it generic using https://www.gnu.org/software/emacs/manual/html_node/elisp/Backquote.html
 (use-package! lsp-julia
     :config
     (setq lsp-julia-package-dir nil)
@@ -124,6 +157,16 @@
                      :major-modes '(c++-mode)
                      :remote? t
                      :server-id 'clangd-remote)))
+
+(use-package! tree-sitter
+  :config
+  (require 'tree-sitter-langs)
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+(use-package! lsp-python-ms
+  :init (setq lsp-python-ms-nupkg-channel "daily")
+  )
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
