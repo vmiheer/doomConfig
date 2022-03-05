@@ -14,6 +14,8 @@
 (package! gitignore-mode
 	  	  :recipe (:host github :repo "magit/git-modes"
 				 			 :files ("gitignore-mode.el")))
+(package! alloy
+  :recipe (:host github :repo "dwwmmn/alloy-mode"))
 (package! flx)
 (package! org-pomodoro)
 (package! org-ref)
