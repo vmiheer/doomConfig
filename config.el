@@ -39,10 +39,6 @@
   "~/org"
   ))
 
-;; (use-package! org-mode-crate
-;;              :init (global-set-key (kbd "<f12>") 'org-agenda)
-;;              :config (require 'org-mode-crate))
-
 (use-package! evil-vars
   :config (add-to-list 'evil-emacs-state-modes 'org-agenda-mode))
 

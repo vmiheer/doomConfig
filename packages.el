@@ -15,8 +15,6 @@
 (package! gitignore-mode
 	  	  :recipe (:host github :repo "magit/git-modes"
 				 			 :files ("gitignore-mode.el")))
-;; (package! org-mode-crate
-;;   :recipe (:host github :repo "vedang/org-mode-crate"))
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
