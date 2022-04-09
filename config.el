@@ -34,14 +34,13 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory (if (eq system-type 'windows-nt)
+(setq org-directory (if (not (directory-empty-p "~/box/org"))
     "~/box/org"
   "~/org"
   ))
 
-(use-package! org-mode-crate
-             :init (global-set-key (kbd "<f12>") 'org-agenda)
-             :config (require 'org-mode-crate))
+(use-package! zig
+  :mode ("\\.csl\\'" . zig-mode))
 
 (use-package! evil-vars
   :config (add-to-list 'evil-emacs-state-modes 'org-agenda-mode))
