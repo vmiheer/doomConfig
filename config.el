@@ -130,6 +130,11 @@
         :desc "Toggle mouse support in term mode" "m" #'xterm-mouse-mode))
 
 (windmove-default-keybindings)
+
+(use-package! plantuml-mode
+  :config
+  (setq plantuml-default-exec-mode 'jar))
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
