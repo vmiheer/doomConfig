@@ -141,6 +141,10 @@
     (setq lsp-julia-flags `("-J/home/mvaidya/.julia/languageserver.so"))
       (setq lsp-julia-default-environment "~/.julia/environments/v1.6"))
 
+(use-package! plantuml-mode
+  :config
+  (setq plantuml-default-exec-mode 'jar))
+
 (use-package! tramp
   :config
   (dolist (elem '("~/.local/bin" "~/.emacs.d/.local/etc/lsp/clangd/clangd_12.0.0/bin"))
