@@ -9,6 +9,8 @@
 (setq user-full-name "Miheer Vaidya"
       user-mail-address "m.vaidya@utah.edu")
 
+(setq mac-command-modifier 'control)
+
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
 ;;
