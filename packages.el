@@ -17,6 +17,7 @@
 (package! flx)
 (package! org-pomodoro)
 (package! org-ref)
+(package! ivy-bibtex)
 ;; (package! org-mode-crate
 ;;   :recipe (:host github :repo "vmiheer/org-mode-crate"))
 ;; (all-the-icons :type git :flavor melpa :files (:defaults "data" "all-the-icons-pkg.el") :host github :repo "domtronn/all-the-icons.el")
