@@ -15,6 +15,10 @@
 (package! gitignore-mode
 	  	  :recipe (:host github :repo "magit/git-modes"
 				 			 :files ("gitignore-mode.el")))
+(package! flx)
+(package! org-ref)
+(package! ivy-bibtex)
+(package! evil-string-inflection)
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
