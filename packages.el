@@ -32,6 +32,7 @@
 (package! lsp-pyright)
 (package! lsp-julia)
 (package! forge)
+(package! justl)
 ;; instructions from https://hungyi.net/posts/use-emacs-tree-sitter-doom-emacs/
 (package! tree-sitter)
 (package! tree-sitter-langs)
