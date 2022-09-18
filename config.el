@@ -98,6 +98,9 @@
   :hook #'auto-revert-mode
   )
 
+(use-package! zig
+  :mode (".csl$"))
+
 (use-package! yaml-mode
   :mode (".yaml$")
   :hook
