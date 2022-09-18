@@ -16,6 +16,8 @@
 				 			 :files ("gitignore-mode.el")))
 (package! alloy
   :recipe (:host github :repo "dwwmmn/alloy-mode"))
+(package! promela-mode
+  :recipe (:host github :repo "rudi/promela-mode"))
 (package! flx)
 (package! org-pomodoro)
 (package! org-ref)
