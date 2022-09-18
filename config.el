@@ -137,12 +137,6 @@
 
 (windmove-default-keybindings)
 ;; TODO: make it generic using https://www.gnu.org/software/emacs/manual/html_node/elisp/Backquote.html
-(use-package! lsp-julia
-    :config
-    (setq lsp-julia-package-dir nil)
-    (setq lsp-julia-flags `("-J/home/mvaidya/.julia/languageserver.so"))
-      (setq lsp-julia-default-environment "~/.julia/environments/v1.6"))
-
 (use-package! plantuml-mode
   :config
   (setq plantuml-default-exec-mode 'jar))
