@@ -98,6 +98,11 @@
   :hook #'auto-revert-mode
   )
 
+(use-package! justl
+  :config
+  (map! :n "RET" 'justl-exec-recipe)
+  )
+
 (use-package! zig
   :mode (".csl$"))
 
