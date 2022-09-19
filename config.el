@@ -98,6 +98,19 @@
   :hook #'auto-revert-mode
   )
 
+;; https://gist.github.com/vmiheer/ee9de0a971af3e22520b64442331700f
+(use-package! python-black
+  :demand t
+  :after python
+  :config
+  (add-hook! 'python-mode-hook #'python-black-on-save-mode)
+  (setq python-black-command "PYTHONPATH=\"\" black")
+  ;; Feel free to throw your own personal keybindings here
+  (map! :leader :desc "Blacken Buffer" "m b b" #'python-black-buffer)
+  (map! :leader :desc "Blacken Region" "m b r" #'python-black-region)
+  (map! :leader :desc "Blacken Statement" "m b s" #'python-black-statement)
+)
+
 (use-package! justl
   :config
   (map! :n "RET" 'justl-exec-recipe)

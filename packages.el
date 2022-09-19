@@ -38,6 +38,7 @@
 ;; (package! poetry)
 (package! just-mode)
 (package! justl)
+(package! python-black)
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:
