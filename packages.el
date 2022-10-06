@@ -21,6 +21,8 @@
 (package! flx)
 (package! org-ref)
 (package! ivy-bibtex)
+(package! just-mode)
+(package! justl)
 (package! evil-string-inflection)
 
 ;; To install a package directly from a remote git repo, you must specify a
