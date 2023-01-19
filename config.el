@@ -98,6 +98,9 @@
   :hook #'auto-revert-mode
   )
 
+(use-package! git-link
+  :config (setq git-link-use-commit t))
+
 ;; https://gist.github.com/vmiheer/ee9de0a971af3e22520b64442331700f
 (use-package! python-black
   :demand t
