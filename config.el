@@ -226,6 +226,12 @@
   (require 'org-ref-arxiv)
   (require 'org-ref-scopus)
   (require 'org-ref-wos))
+
+;; ran in https://github.com/emacs-lsp/lsp-metals/issues/84#issuecomment-1293699837
+(use-package! treemacs
+  :config
+  (require 'treemacs-extensions)
+  )
 ;;
 ;;
 ;; (use-package org-ref-ivy
