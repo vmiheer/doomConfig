@@ -41,6 +41,9 @@
   "~/org"
   ))
 
+(use-package! darkman
+  :config (setq darkman-themes '(:light doom-acario-light :dark doom-acario-dark)))
+
 (use-package! zig
   :mode ("\\.csl\\'" . zig-mode))
 
