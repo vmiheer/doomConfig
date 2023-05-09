@@ -193,3 +193,13 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+(let ((hostname
+    (s-trim
+     (shell-command-to-string "hostname -f"))))
+(setq global-mode-string
+      (cond ((consp global-mode-string)
+             (add-to-list 'global-mode-string hostname 'APPEND))
+            ((not global-mode-string)
+             (list hostname))
+            ((stringp global-mode-string)
+             (list global-mode-string hostname)))))
