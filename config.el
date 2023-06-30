@@ -280,3 +280,8 @@
               ("C-TAB" . 'copilot-accept-completion-by-word)
               ("C-<tab>" . 'copilot-accept-completion-by-word)))
 
+(defun mv/print-as-hex()
+  (interactive)
+  (message
+   (format "%x" (string-to-number (buffer-substring (region-beginning) (region-end))))
+    ))
