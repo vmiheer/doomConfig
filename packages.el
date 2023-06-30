@@ -8,6 +8,10 @@
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
+
+(package! copilot
+  :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
+
 (package! gitconfig-mode
 	  	  :recipe (:host github :repo "magit/git-modes"
 				 			 :files ("gitconfig-mode.el")))
