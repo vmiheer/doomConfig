@@ -18,6 +18,9 @@
 (package! gitignore-mode
 	  	  :recipe (:host github :repo "magit/git-modes"
 				 			 :files ("gitignore-mode.el")))
+(package! mlir-mode
+  :recipe (:host github :repo "llvm/llvm-project"
+           :files ("mlir/utils/emacs/*.el")))
 (package! gitignore-templates)
 (package! flx)
 (package! org-pomodoro)
