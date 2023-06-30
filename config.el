@@ -47,8 +47,8 @@
       :config (setq darkman-themes '(:light doom-acario-light :dark doom-acario-dark)))
   t)
 
-(use-package! zig
-  :mode ("\\.csl\\'" . zig-mode))
+;; (use-package! zig
+;;   :mode ("\\.csl\\'" . zig-mode))
 
 (use-package! evil-vars
   :config (add-to-list 'evil-emacs-state-modes 'org-agenda-mode))
@@ -125,9 +125,6 @@
   (map! :n "RET" 'justl-exec-recipe)
   )
 
-(use-package! zig
-  :mode (".csl$"))
-
 (use-package! yaml-mode
   :mode (".yaml$")
   :hook
@@ -166,10 +163,6 @@
   )
 
 (windmove-default-keybindings)
-;; TODO: make it generic using https://www.gnu.org/software/emacs/manual/html_node/elisp/Backquote.html
-(use-package! plantuml-mode
-  :config
-  (setq plantuml-default-exec-mode 'jar))
 
 (use-package! tramp
   :config
