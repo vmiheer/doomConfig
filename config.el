@@ -234,12 +234,16 @@
   (require 'org-ref-scopus)
   (require 'org-ref-wos))
 
-;; ran in https://github.com/emacs-lsp/lsp-metals/issues/84#issuecomment-1293699837
-(use-package! treemacs
+(use-package! pyvenv
   :config
-  (require 'treemacs-extensions)
-  )
-;;
+  ;; Set correct Python interpreter
+  (setq pyvenv-post-activate-hooks
+        (list (lambda ()
+                (setq python-shell-interpreter (concat pyvenv-virtual-env "bin/python3")))))
+  (setq pyvenv-post-deactivate-hooks
+        (list (lambda ()
+                (setq python-shell-interpreter "python3")))))
+
 ;;
 ;; (use-package org-ref-ivy
 ;;   :ensure nil
