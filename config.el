@@ -186,6 +186,7 @@
 
 (require 'mlir-lsp-client)
 (use-package! mlir-mode
+  :mode ("\\.td\\'" . tablegen-mode)
   :config (progn
             (setq lsp-mlir-server-executable "/home/mvaidya/source/repos/MLIR_Workspace/llvm-project/build/bin/mlir-lsp-server")
             (add-hook! 'mlir-mode-hook '(lambda () (progn (lsp-mlir-setup) (lsp))))))
