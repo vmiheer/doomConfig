@@ -39,9 +39,6 @@
 (package! lsp-pyright)
 (package! lsp-julia)
 (package! forge)
-;; instructions from https://hungyi.net/posts/use-emacs-tree-sitter-doom-emacs/
-(package! tree-sitter)
-(package! tree-sitter-langs)
 (package! evil-string-inflection)
 ;; (package! poetry)
 (package! just-mode)
