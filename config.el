@@ -180,11 +180,10 @@
                      :remote? t
                      :server-id 'clangd-remote)))
 
-(use-package! tree-sitter
+(use-package! evil-string-inflection
   :config
-  (require 'tree-sitter-langs)
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+  (map! :leader :desc "Toggle case" "t t" #'string-inflection-cycle))
+
 (require 'mlir-lsp-client)
 (use-package! mlir-mode
   :config (progn
