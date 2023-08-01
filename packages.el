@@ -20,7 +20,7 @@
 				 			 :files ("gitignore-mode.el")))
 (package! mlir-mode
   :recipe (:host github :repo "llvm/llvm-project"
-           :files ("mlir/utils/emacs/*.el")))
+           :files ("mlir/utils/emacs/*.el" "llvm/utils/emacs/*.el")))
 (package! gitignore-templates)
 (package! flx)
 (package! org-pomodoro)
