@@ -294,3 +294,5 @@
   (message
    (format "%x" (string-to-number (buffer-substring (region-beginning) (region-end))))
     ))
+
+(set-file-template! "/CMakePresets\\.json$" :trigger "__CMakePresets.json" :mode 'json-mode)
