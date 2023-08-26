@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
+
+# create project
+project(Bricks)
+
+# add executable
+add_executable(bricks bricks.cpp)
+
+# add dependencies
+include(cmake/CPM.cmake)
+
+CPMAddPackage("gh:fmtlib/fmt#10.0.0")
+CPMAddPackage("gh:kokkos/mdspan#stable")
+
+# link dependencies
+target_link_libraries(bricks fmt::fmt std::mdspan)
+set_property(TARGET bricks PROPERTY CXX_STANDARD 20)

@@ -296,3 +296,4 @@
     ))
 
 (set-file-template! "/CMakePresets\\.json$" :trigger "__CMakePresets.json" :mode 'json-mode)
+(set-file-template! "/CMakeLists\\.txt$" :trigger "__CMakeLists.txt" :mode 'json-mode)
