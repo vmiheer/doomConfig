@@ -292,8 +292,9 @@
 (defun mv/print-as-hex()
   (interactive)
   (message
-   (format "%x" (string-to-number (buffer-substring (region-beginning) (region-end))))
-    ))
+   (format "%x" (string-to-number (buffer-substring (region-beginning) (region-end))))))
+
+(setq lsp-json-schemas `[(:fileMatch ["CMakePresets.json" "CMakeUserPresets.json"] :url  "https://cmake.org/cmake/help/latest/_downloads/3e2d73bff478d88a7de0de736ba5e361/schema.json")])
 
 (set-file-template! "/CMakePresets\\.json$" :trigger "__CMakePresets.json" :mode 'json-mode)
 (set-file-template! "/CMakeLists\\.txt$" :trigger "__CMakeLists.txt" :mode 'json-mode)
