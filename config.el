@@ -302,3 +302,36 @@
 
 (set-file-template! "/CMakePresets\\.json$" :trigger "__CMakePresets.json" :mode 'json-mode)
 (set-file-template! "/CMakeLists\\.txt$" :trigger "__CMakeLists.txt" :mode 'json-mode)
+
+(require 'ivy)
+(require 'taskrunner)
+(require 's)
+
+(defun mv/get-ninja-tasks (DIR)
+  "Retrieve all ninja tasks from directory DIR.
+Happily copied from https://github.com/emacs-taskrunner/emacs-taskrunner/blob/716323aff410b4d864d137c9ebe4bbb5b8587f5e/taskrunner-clang.el#L126
+TODO: upstream this"
+  (let ((default-directory DIR)
+        (targets '()))
+    (call-process "ninja" nil (taskrunner--make-task-buff-name "ninja") nil "-t" "targets")
+    (with-temp-buffer
+      (set-buffer (taskrunner--make-task-buff-name "ninja"))
+      (goto-char (point-min))
+      (dolist (elem (split-string (buffer-string) "\n"))
+        (push (car (split-string elem ":")) targets))
+      (kill-current-buffer)
+      )
+    targets))
+(defun mv/counsel-ninja-target ()
+  "Forward to `describe-function'."
+  (interactive)
+  (ivy-read "Run Ninja: "
+                (mv/get-ninja-tasks (car ivy-taskrunner-build-dir-list))
+            :keymap counsel-describe-map
+            :preselect (ivy-thing-at-point)
+            :history 'counsel-ninja-target-history
+            :require-match t
+            :action (lambda (x)
+                      (compile (s-join
+                       " " (append `("ninja" "-C" ,(car ivy-taskrunner-build-dir-list) ,x)))))
+            :caller 'counsel-ninja-target))
