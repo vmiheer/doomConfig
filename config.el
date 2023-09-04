@@ -104,6 +104,10 @@
   :hook #'auto-revert-mode
   )
 
+(use-package! lsp-pyright
+  :init (setq lsp-pyright-multi-root nil)
+  )
+
 (use-package! git-link
   :config (setq git-link-use-commit t))
 
