@@ -23,6 +23,7 @@
            :files ("mlir/utils/emacs/*.el" "llvm/utils/emacs/*.el")))
 (package! gitignore-templates)
 (package! flx)
+(package! adoc-mode)
 (package! org-pomodoro)
 (package! org-ref)
 (package! ivy-bibtex)
