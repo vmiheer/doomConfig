@@ -335,3 +335,9 @@ TODO: upstream this"
                       (compile (s-join
                        " " (append `("ninja" "-C" ,(car ivy-taskrunner-build-dir-list) ,x)))))
             :caller 'counsel-ninja-target))
+
+(defun mv/org-pdf-hook()
+  (interactive)
+  (progn
+    (org-babel-tangle)
+    (org-export-to-file 'latex (s-prepend (f-no-ext (f-this-file)) ".tex"))))
