@@ -11,6 +11,9 @@
 
 (setq mac-command-modifier 'control)
 
+(require 's)
+(require 'f)
+
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
 ;;
