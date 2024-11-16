@@ -1,5 +1,6 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
+(require 's)
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
@@ -69,7 +70,7 @@
 
 (use-package! markdown-mode
   :config (setq fill-column 80)
-  :init (add-hook 'gfm-mode-hook '(lambda ()
+  :init (add-hook 'gfm-mode-hook #'(lambda ()
                                     (progn
                                       (auto-fill-mode 1)
                                       (flyspell-mode)
@@ -79,7 +80,7 @@
 
 (use-package! org
   :config (setq fill-column 80)
-  :init (add-hook 'org-mode-hook '(lambda ()
+  :init (add-hook 'org-mode-hook #'(lambda ()
                                     (progn
                                       (auto-fill-mode 1)
                                       (flyspell-mode)
@@ -115,60 +116,6 @@
   :config (setq git-link-use-commit t))
 
 ;; https://gist.github.com/vmiheer/ee9de0a971af3e22520b64442331700f
-(use-package! python-black
-  :demand t
-  :after python
-  :config
-  (add-hook! 'python-mode-hook #'python-black-on-save-mode)
-  (setq python-black-command "PYTHONPATH=\"\" black")
-  ;; Feel free to throw your own personal keybindings here
-  (map! :leader :desc "Blacken Buffer" "m b b" #'python-black-buffer)
-  (map! :leader :desc "Blacken Region" "m b r" #'python-black-region)
-  (map! :leader :desc "Blacken Statement" "m b s" #'python-black-statement)
-)
-
-(use-package! justl
-  :config
-  (map! :n "RET" 'justl-exec-recipe)
-  )
-
-(use-package! yaml-mode
-  :mode (".yaml$")
-  :hook
-  (yaml-mode . yaml-mode-outline-hook)
-
-  :init
-  (defun yaml-outline-level ()
-    "Return the outline level based on the indentation, hardcoded at 2 spaces."
-    (s-count-matches "[ ]\\{2\\}" (match-string 0)))
-
-  (defun yaml-mode-outline-hook ()
-    (outline-minor-mode)
-    (setq outline-regexp
-      (rx
-       (seq
-        bol
-        (group (zero-or-more "  ")
-               (or (group
-                    (seq (or (seq "\"" (*? (not (in "\"" "\n"))) "\"")
-                             (seq "'" (*? (not (in "'" "\n"))) "'")
-                             (*? (not (in ":" "\n"))))
-                         ":"
-                         (?? (seq
-                              (*? " ")
-                              (or (seq "&" (one-or-more nonl))
-                                  (seq ">-")
-                                  (seq "|"))
-                              eol))))
-                   (group (seq
-                           "- "
-                           (+ (not (in ":" "\n")))
-                           ":"
-                           (+ nonl)
-                           eol)))))))
-    (setq outline-level 'yaml-outline-level))
-  )
-
 (windmove-default-keybindings)
 
 (use-package! tramp
@@ -187,6 +134,26 @@
                      :remote? t
                      :server-id 'clangd-remote)))
 
+(use-package! tree-sitter
+  :config
+  (require 'tree-sitter-langs)
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+
+;; ran in https://github.com/emacs-lsp/lsp-metals/issues/84#issuecomment-1293699837
+(use-package! treemacs
+  :config
+  (require 'treemacs-extensions)
+  )
+(use-package! lsp
+  :config
+  (lsp-register-client
+    (make-lsp-client :new-connection (lsp-tramp-connection "clangd")
+                     :major-modes '(c++-mode)
+                     :remote? t
+                     :server-id 'clangd-remote)))
+
 (use-package! evil-string-inflection
   :config
   (map! :leader :desc "Toggle case" "t t" #'string-inflection-cycle))
@@ -197,49 +164,6 @@
   :config (progn
             (setq lsp-mlir-server-executable "/home/mvaidya/source/repos/MLIR_Workspace/llvm-project/build/bin/mlir-lsp-server")
             (add-hook! 'mlir-mode-hook '(lambda () (progn (lsp-mlir-setup) (lsp))))))
-
-(use-package! lsp-python-ms
-  :init (setq lsp-python-ms-nupkg-channel "daily")
-  )
-
-(use-package! ivy-bibtex
-  :init
-  (setq bibtex-completion-bibliography '("~/Dropbox/emacs/bibliography/references.bib"
-					 "~/Dropbox/emacs/bibliography/dei.bib"
-					 "~/Dropbox/emacs/bibliography/master.bib"
-					 "~/Dropbox/emacs/bibliography/archive.bib")
-	bibtex-completion-library-path '("~/Dropbox/emacs/bibliography/bibtex-pdfs/")
-	bibtex-completion-notes-path "~/Dropbox/emacs/bibliography/notes/"
-	bibtex-completion-notes-template-multiple-files "* ${author-or-editor}, ${title}, ${journal}, (${year}) :${=type=}: \n\nSee [[cite:&${=key=}]]\n"
-
-	bibtex-completion-additional-search-fields '(keywords)
-	bibtex-completion-display-formats
-	'((article       . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${journal:40}")
-	  (inbook        . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} Chapter ${chapter:32}")
-	  (incollection  . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
-	  (inproceedings . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
-	  (t             . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*}"))
-	bibtex-completion-pdf-open-function
-	(lambda (fpath)
-	  (call-process "open" nil 0 nil fpath))))
-
-(use-package! org-ref
-  :init
-  (require 'bibtex)
-  (setq bibtex-autokey-year-length 4
-	bibtex-autokey-name-year-separator "-"
-	bibtex-autokey-year-title-separator "-"
-	bibtex-autokey-titleword-separator "-"
-	bibtex-autokey-titlewords 2
-	bibtex-autokey-titlewords-stretch 1
-	bibtex-autokey-titleword-length 5)
-  (define-key bibtex-mode-map (kbd "H-b") 'org-ref-bibtex-hydra/body)
-  (define-key org-mode-map (kbd "C-c ]") 'org-ref-insert-link)
-  (define-key org-mode-map (kbd "s-[") 'org-ref-insert-link-hydra/body)
-  (require 'org-ref-ivy)
-  (require 'org-ref-arxiv)
-  (require 'org-ref-scopus)
-  (require 'org-ref-wos))
 
 (use-package! pyvenv
   :config
@@ -277,18 +201,10 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-(let ((hostname
-    (s-trim
-     (shell-command-to-string "hostname -f"))))
-(setq global-mode-string
-      (cond ((consp global-mode-string)
-             (add-to-list 'global-mode-string hostname 'APPEND))
-            ((not global-mode-string)
-             (list hostname))
-            ((stringp global-mode-string)
-             (list global-mode-string hostname)))))
+
 ;; accept completion from copilot and fallback to company
 (use-package! copilot
+  :config (setq copilot-node-executable "/uufs/chpc.utah.edu/common/home/u1290058/.local/bin/node")
   :hook (prog-mode . copilot-mode)
   :bind (:map copilot-completion-map
               ("<tab>" . 'copilot-accept-completion)
@@ -296,6 +212,16 @@
               ("C-TAB" . 'copilot-accept-completion-by-word)
               ("C-<tab>" . 'copilot-accept-completion-by-word)))
 
+(setq mv/ssh-mount-prefix "file:////Users/miheerv/mnt/chpcScratch")
+
+(defun get-excel-path()
+  (interactive)
+  (message
+   (if (boundp 'mv/ssh-mount-prefix)
+       (s-replace "/scratch/general/vast/u1290058" mv/ssh-mount-prefix (dired-get-filename))
+       (s-replace "/scratch/general/vast/u1290058" "d:/" (dired-get-filename))
+       )))
+(global-set-key (kbd "M-<backspace>") 'doom/delete-backward-word)
 (defun mv/print-as-hex()
   (interactive)
   (message

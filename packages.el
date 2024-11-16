@@ -29,8 +29,12 @@
 (package! org-pomodoro)
 (package! org-ref)
 (package! ivy-bibtex)
-;; (package! org-mode-crate
-;;   :recipe (:host github :repo "vmiheer/org-mode-crate"))
+(package! mlir-mode
+  :recipe (:host github :repo "vmiheer/mlir-mode"
+  :files ("*.el"))
+  )
+(package! cmake-mode)
+(package! flx)
 ;; (all-the-icons :type git :flavor melpa :files (:defaults "data" "all-the-icons-pkg.el") :host github :repo "domtronn/all-the-icons.el")
 (package! yasnippet-radical-snippets
   :recipe (:host github :repo "vmiheer/yasnippet-radical-snippets"
