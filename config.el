@@ -104,13 +104,10 @@
       (:prefix ("t" . "toggle")
         :desc "Toggle mouse support in term mode" "m" #'xterm-mouse-mode))
 
-(use-package! python-mode
-  :hook #'auto-revert-mode
-  )
-
-(use-package! lsp-pyright
-  :init (setq lsp-pyright-multi-root nil)
-  )
+(setq-hook! python-mode
+  flycheck-checker 'python-ruff)
+(setq-hook! python-mode
+  apheleia-formatter 'ruff)
 
 (use-package! git-link
   :config (setq git-link-use-commit t))
