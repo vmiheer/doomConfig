@@ -24,6 +24,7 @@
   :recipe (:host github :repo "llvm/llvm-project"
            :files ("mlir/utils/emacs/*.el" "llvm/utils/emacs/*.el")))
 (package! gitignore-templates)
+(package! taskrunner)
 (package! flx)
 (package! adoc-mode)
 (package! org-pomodoro)
