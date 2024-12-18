@@ -267,3 +267,5 @@ TODO: upstream this"
   (progn
     (org-babel-tangle)
     (org-export-to-file 'latex (s-prepend (f-no-ext (f-this-file)) ".tex"))))
+
+(global-set-key (kbd "M-<backspace>") 'doom/delete-backward-word)
